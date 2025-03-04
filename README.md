@@ -31,4 +31,4 @@ This project demonstrates how to set up an SSL certificate using Docker Compose.
 
 ## Usage
 
-Access your application via `https://localhost` running on port 443.
+application is running on `https://localhost:443`
