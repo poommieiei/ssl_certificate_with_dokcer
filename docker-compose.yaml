@@ -1,0 +1,30 @@
+
+
+services:
+  nginx:
+    image: "nginx:latest"
+    ports:
+      - "443:443"
+    volumes:
+      - ./mysig.crt:/etc/nginx/ssl/mysig.crt
+      - ./mysig.key:/etc/nginx/ssl/mysig.key
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend/index.html:/usr/share/nginx/html/index.html:ro
+    networks:
+      - my-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - my-network
+    restart: always
+
+networks:
+  my-network:
+    driver: bridge
